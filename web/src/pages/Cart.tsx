@@ -1,4 +1,4 @@
-import sabao from '../assets/sabão-v2.png';
+import sabao from '../assets/sabão-v2.webp';
 
 import { CartProductCard } from '@/components/CartProductCard';
 import { Button } from '@/components/ui/button';

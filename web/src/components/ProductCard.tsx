@@ -38,8 +38,8 @@ export function ProductCard({ image, product, onAdd }: ProductCardProps) {
 
       <div className='p-2 sm:p-3 space-y-1'>
         <div>
-          <p className='font-semibold text-gray-900 text-sm leading-tight line-clamp-2 min-h-[2.5rem]'>
-            {product.name} <br />
+          <p className='font-semibold text-gray-900 text-sm leading-tight min-h-[2.5rem]'>
+            <span className='line-clamp-1'>{product.name}</span>
             <span className='text-xs'>{product.company}</span>
           </p>
         </div>
