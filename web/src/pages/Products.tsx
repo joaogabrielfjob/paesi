@@ -55,9 +55,10 @@ export function Products() {
 
   return (
     <div className='min-h-screen flex flex-col px-6 py-10 relative'>
-      <div className='grid grid-cols-2 gap-3 sm:gap-4'>
-        {products?.length &&
-          products.map((product) => (
+      
+      {products?.length ? (
+        <div className='grid grid-cols-2 gap-3 sm:gap-4'>
+          {products.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -65,8 +66,13 @@ export function Products() {
               onAdd={handleAddToCart}
             />
           ))}
-      </div>
-
+        </div>
+      ) : (
+        <p className='w-full text-gray-600 text-center'>
+          Ainda não temos produtos cadastrados.
+        </p>
+      )}
+      
       <CartButton itemCount={cartCount} onClick={() => navigate('/carrinho')} />
     </div>
   );
