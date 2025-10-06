@@ -11,6 +11,11 @@ export const auth = betterAuth({
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || 'secret'
   }),
+  baseURL: "https://auth-production-1de6.up.railway.app",
+  trustedOrigins: [
+    "https://web-production-38e41.up.railway.app",
+    "https://server-production-4cae.up.railway.app"
+  ],
   emailAndPassword: {
     enabled: true
   },
