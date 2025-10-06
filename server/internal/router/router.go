@@ -1,6 +1,7 @@
 package router
 
 import (
+	"cmp"
 	"os"
 	"time"
 
@@ -22,10 +23,7 @@ func Init() {
 
 	initializeRoutes(router)
 
-	// Use PORT from environment or default to 7777
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "7777"
-	}
-	router.Run(":" + port)
+	port := cmp.Or(os.Getenv("PORT"), "7777")
+
+	router.Run("0.0.0.0:" + port)
 }
