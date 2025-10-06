@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { fetchToken, signUp } from '@/services/auth_service';
-import type { AuthResponse, SignUpRequest } from '@/services/types';
+import type { SignUpRequest } from '@/services/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -37,13 +37,10 @@ export function SignUp() {
     mutationFn: async () => {
       return await fetchToken();
     },
-    onSuccess: (data) => {
-      if (data && typeof data === 'object' && 'token' in data) {
-        const response = data as AuthResponse;
-        localStorage.setItem('token', response.token);
+    onSuccess: ({ data }) => {
+      localStorage.setItem('token', data.token);
 
-        navigate('/');
-      }
+      navigate('/');
     },
     onError: (error) => {
       console.error('Failed to fetch token:', error);

@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLoading } from '@/hooks/use_loading';
 import { useMutation } from '@tanstack/react-query';
 import { signIn, fetchToken } from '@/services/auth_service';
-import type { AuthResponse, SignInRequest } from '@/services/types';
+import type { SignInRequest } from '@/services/types';
 
 const formSchema = z.object({
   email: z.email({
@@ -36,12 +36,9 @@ export function SignIn() {
       return await fetchToken();
     },
     onSuccess: ({ data }) => {
-      if (data && typeof data === 'object' && 'token' in data) {
-        const response = data as AuthResponse;
-        localStorage.setItem('token', response.token);
+      localStorage.setItem('token', data.token);
 
-        navigate('/');
-      }
+      navigate('/');
     },
     onError: (error) => {
       console.error('Failed to fetch token:', error);
