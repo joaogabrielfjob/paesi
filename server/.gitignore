@@ -1,0 +1,5 @@
+.air.toml
+tmp
+.env
+docker-compose.yml
+make
