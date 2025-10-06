@@ -10,4 +10,9 @@ export default defineConfig({
       '@': '/src',
     },
   },
+  server: {
+    allowedHosts: [
+      'web-production-38e41.up.railway.app'
+    ]
+  }
 });

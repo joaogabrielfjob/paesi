@@ -1,2 +1,10 @@
 docker-compose.yml
 nginx.conf
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Railway
+.railway

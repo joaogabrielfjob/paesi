@@ -14,10 +14,7 @@ var (
 )
 
 func Load() error {
-	err = godotenv.Load()
-	if err != nil {
-		return fmt.Errorf("error loading env file: %v", err)
-	}
+	_ = godotenv.Load()
 
 	database, err = db.Init()
 	if err != nil {

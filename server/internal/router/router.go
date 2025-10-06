@@ -1,6 +1,7 @@
 package router
 
 import (
+	"os"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -11,7 +12,7 @@ func Init() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:5173"},
+		AllowOrigins:     []string{"https://web-production-38e41.up.railway.app"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -21,5 +22,10 @@ func Init() {
 
 	initializeRoutes(router)
 
-	router.Run(":7777")
+	// Use PORT from environment or default to 7777
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "7777"
+	}
+	router.Run(":" + port)
 }

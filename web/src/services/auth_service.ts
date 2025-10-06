@@ -5,29 +5,29 @@ import type {
   FetchUserResponse,
   UpdateUserRequest,
 } from './types';
-import { client } from './client';
+import { authClient } from './client';
 
 const basePath = '/api/auth';
 
 const signIn = async (request: SignInRequest) => {
-  return await client.post<AuthResponse>(`${basePath}/sign-in/email`, request);
+  return await authClient.post<AuthResponse>(`${basePath}/sign-in/email`, request);
 };
 
 const fetchToken = async () => {
-  return await client.get<AuthResponse>(`${basePath}/token`);
+  return await authClient.get<AuthResponse>(`${basePath}/token`);
 };
 
 const signUp = async (request: SignUpRequest) => {
-  return await client.post<AuthResponse>(`${basePath}/sign-up/email`, request);
+  return await authClient.post<AuthResponse>(`${basePath}/sign-up/email`, request);
 };
 
 const signOut = async () => {
-  return await client.post(`${basePath}/sign-out`);
+  return await authClient.post(`${basePath}/sign-out`);
 };
 
 const fetchUser = async () => {
   try {
-    const { data } = await client.get<FetchUserResponse>(
+    const { data } = await authClient.get<FetchUserResponse>(
       `${basePath}/get-session`,
     );
 
@@ -40,11 +40,11 @@ const fetchUser = async () => {
 };
 
 const updateUser = async (request: UpdateUserRequest) => {
-  return await client.post(`${basePath}/update-user`, request);
+  return await authClient.post(`${basePath}/update-user`, request);
 };
 
 const changeEmail = async (newEmail: string) => {
-  return await client.post(`${basePath}/change-email`, { newEmail });
+  return await authClient.post(`${basePath}/change-email`, { newEmail });
 };
 
 export {
