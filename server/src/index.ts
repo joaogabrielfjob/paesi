@@ -1,4 +1,5 @@
 import { Elysia } from 'elysia'
+import cors from '@elysiajs/cors'
 
 import { configureProductRoutes } from './routes/product_routes'
 import { configureUserRoutes } from './routes/user_routes'
@@ -10,7 +11,6 @@ import { InvariantError } from './exceptions/invariant_error'
 import { authMiddleware } from './middleware/auth_middleware'
 import { configureAddressRoutes } from './routes/address_routes'
 import { configureOrderRoutes } from './routes/order_routes'
-import cors from '@elysiajs/cors'
 
 const server = new Elysia()
 
@@ -19,10 +19,10 @@ server
   .error('AUTHORIZATION_ERROR', AuthorizationError)
   .error('INVARIANT_ERROR', InvariantError)
   .onError(({ code, error, set }) => {
-    console.log(error)
+    console.error(error)
 
     switch (code) {
-      case 'VALIDATION': 
+      case 'VALIDATION':
         set.status = 400
         return {
           status: 'error',
@@ -64,9 +64,10 @@ server
 server
   .use(
     cors({
+      origin: process.env.ORIGIN,
       credentials: true,
-      allowedHeaders: ["Content-Type"],
-      methods: ["GET", "POST", "PUT"]
+      allowedHeaders: ['Content-Type'],
+      methods: ['GET', 'POST', 'PUT']
     })
   )
   .use(authMiddleware)
@@ -76,8 +77,8 @@ server
   .group('/users', configureUserRoutes)
   .group('/address', configureAddressRoutes)
   .group('/orders', configureOrderRoutes)
-  .listen(process.env.BUN_PORT!)
+  .listen(process.env.BUN_PORT)
 
-console.log(
+console.info(
   `🦊 Elysia is running at ${server.server?.hostname}:${server.server?.port}`
 )

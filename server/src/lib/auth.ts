@@ -7,7 +7,7 @@ const db = new PrismaClient()
 export const auth = betterAuth({
   basePath: '/auth',
   trustedOrigins: [
-    'http://localhost:5173' // TODO tem que virar env
+    process.env.ORIGIN
   ],
   database: prismaAdapter(db, {
     provider: 'postgresql'
