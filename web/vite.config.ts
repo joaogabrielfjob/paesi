@@ -11,6 +11,6 @@ export default defineConfig({
     }
   },
   server: {
-    allowedHosts: ['web-production-38e41.up.railway.app']
+    allowedHosts: ['web-production-d7de3.up.railway.app']
   }
 });
