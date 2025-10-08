@@ -74,7 +74,7 @@ export type AddressResponse = {
     neighborhood: string;
     number: string;
     complement?: string;
-  }
+  };
 };
 
 export type UpsertAddressRequest = {

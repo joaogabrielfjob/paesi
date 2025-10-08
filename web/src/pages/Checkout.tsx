@@ -30,19 +30,19 @@ export function Checkout() {
     },
     onError: (error) => {
       console.error('Create order failed:', error);
-    },
+    }
   });
 
   const formatToCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
-      currency: 'BRL',
+      currency: 'BRL'
     }).format(value);
   };
 
   const subtotal = cart.products.reduce(
     (total, cp) => total + cp.quantity * cp.product.price,
-    0,
+    0
   );
   const shipping = 10.0;
   const total = subtotal + shipping - discount;
@@ -59,8 +59,8 @@ export function Checkout() {
     const request = {
       products: cart.products.map((cp) => ({
         productId: cp.product.id,
-        quantity: cp.quantity,
-      })),
+        quantity: cp.quantity
+      }))
     };
 
     createOrderMutation.mutate(request);

@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 export function Orders() {
   const { data: orders, fetchStatus } = useQuery({
     queryKey: ['orders'],
-    queryFn: async () => await fetchOrders(),
+    queryFn: async () => await fetchOrders()
   });
 
   useLoading([fetchStatus]);

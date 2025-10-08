@@ -10,7 +10,7 @@ interface CartButtonProps {
 export function CartButton({
   itemCount = 0,
   onClick,
-  className = '',
+  className = ''
 }: CartButtonProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [prevCount, setPrevCount] = useState(itemCount);

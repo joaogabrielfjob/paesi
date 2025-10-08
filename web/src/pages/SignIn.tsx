@@ -7,7 +7,7 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
@@ -16,34 +16,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { useLoading } from '@/hooks/use_loading';
 import { useMutation } from '@tanstack/react-query';
-import { signIn, fetchToken } from '@/services/auth_service';
+import { signIn } from '@/services/auth_service';
 import type { SignInRequest } from '@/services/types';
 
 const formSchema = z.object({
   email: z.email({
-    error: 'Por favor, insira um email válido',
+    error: 'Por favor, insira um email válido'
   }),
   password: z.string().min(1, {
-    error: 'Por favor, insira uma senha válida',
-  }),
+    error: 'Por favor, insira uma senha válida'
+  })
 });
 
 export function SignIn() {
   const navigate = useNavigate();
-
-  const fetchTokenMutation = useMutation({
-    mutationFn: async () => {
-      return await fetchToken();
-    },
-    onSuccess: ({ data }) => {
-      localStorage.setItem('token', data.token);
-
-      navigate('/');
-    },
-    onError: (error) => {
-      console.error('Failed to fetch token:', error);
-    },
-  });
 
   const signInMutation = useMutation({
     mutationFn: (request: SignInRequest) => {
@@ -54,26 +40,23 @@ export function SignIn() {
     },
     onError: (error) => {
       console.error('Sign in failed:', error);
-    },
+    }
   });
 
-  useLoading([
-    signInMutation.isPending ? 'fetching' : 'idle',
-    fetchTokenMutation.isPending ? 'fetching' : 'idle',
-  ]);
+  useLoading([signInMutation.isPending ? 'fetching' : 'idle']);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
-      password: '',
-    },
+      password: ''
+    }
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     signInMutation.mutate({
       email: values.email,
-      password: values.password,
+      password: values.password
     });
   }
 

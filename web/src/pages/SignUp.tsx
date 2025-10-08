@@ -7,10 +7,10 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { fetchToken, signUp } from '@/services/auth_service';
+import { signUp } from '@/services/auth_service';
 import type { SignUpRequest } from '@/services/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -20,32 +20,18 @@ import z from 'zod';
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    error: 'Por favor, insira um nome válido',
+    error: 'Por favor, insira um nome válido'
   }),
   email: z.email({
-    error: 'Por favor, insira um email válido',
+    error: 'Por favor, insira um email válido'
   }),
   password: z.string().min(1, {
-    error: 'Por favor, insira uma senha válida',
-  }),
+    error: 'Por favor, insira uma senha válida'
+  })
 });
 
 export function SignUp() {
   const navigate = useNavigate();
-
-  /* const fetchTokenMutation = useMutation({
-    mutationFn: async () => {
-      return await fetchToken();
-    },
-    onSuccess: ({ data }) => {
-      localStorage.setItem('token', data.token);
-
-      navigate('/');
-    },
-    onError: (error) => {
-      console.error('Failed to fetch token:', error);
-    },
-  }); */
 
   const signUpMutation = useMutation({
     mutationFn: async (request: SignUpRequest) => {
@@ -55,8 +41,8 @@ export function SignUp() {
       navigate('/');
     },
     onError: (error) => {
-      console.error('Sign in failed:', error);
-    },
+      console.error('Sign up failed:', error);
+    }
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,15 +50,15 @@ export function SignUp() {
     defaultValues: {
       name: '',
       email: '',
-      password: '',
-    },
+      password: ''
+    }
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     signUpMutation.mutate({
       name: values.name,
       email: values.email,
-      password: values.password,
+      password: values.password
     });
   }
 

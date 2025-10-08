@@ -12,7 +12,7 @@ export function Cart() {
   const formatToCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
-      currency: 'BRL',
+      currency: 'BRL'
     }).format(value);
   };
 
@@ -25,7 +25,7 @@ export function Cart() {
 
   const total = cart.products.reduce(
     (total, cp) => total + cp.quantity * cp.product.price,
-    0,
+    0
   );
 
   const handleQuantityChange = (productId: number, newQuantity: number) => {
@@ -35,7 +35,7 @@ export function Cart() {
           if (cartProduct.product.id === productId) {
             return {
               ...cartProduct,
-              quantity: newQuantity,
+              quantity: newQuantity
             };
           }
           return cartProduct;

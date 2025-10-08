@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useLoading } from '@/hooks/use_loading';
@@ -19,14 +19,14 @@ import z from 'zod';
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    error: 'Por favor, insira um nome válido',
+    error: 'Por favor, insira um nome válido'
   }),
   email: z.email({
-    error: 'Por favor, insira um email válido',
+    error: 'Por favor, insira um email válido'
   }),
   phone: z.string().min(1, {
-    error: 'Por favor, insira um celular válido',
-  }),
+    error: 'Por favor, insira um celular válido'
+  })
 });
 
 export function MyAccount() {
@@ -34,7 +34,7 @@ export function MyAccount() {
 
   const { data: user, fetchStatus } = useQuery({
     queryKey: ['user'],
-    queryFn: async () => await fetchUser(),
+    queryFn: async () => await fetchUser()
   });
 
   useLoading([fetchStatus]);
@@ -42,7 +42,7 @@ export function MyAccount() {
   const updateUserMutation = useMutation({
     mutationFn: async ({
       updates,
-      email,
+      email
     }: {
       updates?: UpdateUserRequest;
       email?: string;
@@ -64,7 +64,7 @@ export function MyAccount() {
     },
     onError: (error) => {
       console.error('Erro ao atualizar usuário:', error);
-    },
+    }
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -72,8 +72,8 @@ export function MyAccount() {
     defaultValues: {
       name: '',
       email: '',
-      phone: '',
-    },
+      phone: ''
+    }
   });
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export function MyAccount() {
       form.reset({
         name: user.name || '',
         email: user.email || '',
-        phone: user.phone || '',
+        phone: user.phone || ''
       });
     }
   }, [user, form]);
@@ -109,7 +109,7 @@ export function MyAccount() {
 
     updateUserMutation.mutate({
       updates: updates,
-      email: newEmail,
+      email: newEmail
     });
   }
 

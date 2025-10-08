@@ -45,18 +45,14 @@ export function OrderCard({ order }: OrderCardProps) {
         {order.deliveredAt && (
           <p className='text-gray-600 text-sm'>
             Entregue em:{' '}
-            <span className='font-medium'>
-              {formatDate(order.deliveredAt)}
-            </span>
+            <span className='font-medium'>{formatDate(order.deliveredAt)}</span>
           </p>
         )}
 
         {order.deletedAt && (
           <p className='text-gray-600 text-sm'>
             Cancelado em:{' '}
-            <span className='font-medium'>
-              {formatDate(order.deletedAt)}
-            </span>
+            <span className='font-medium'>{formatDate(order.deletedAt)}</span>
           </p>
         )}
       </div>

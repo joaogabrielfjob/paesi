@@ -21,14 +21,14 @@ export function Products() {
 
   const { data: products, fetchStatus } = useQuery({
     queryKey: ['products'],
-    queryFn: async () => await fetchProducts(),
+    queryFn: async () => await fetchProducts()
   });
 
   useLoading([fetchStatus]);
 
   const cartCount = cart.products.reduce(
     (total, product) => total + product.quantity,
-    0,
+    0
   );
 
   const handleAddToCart = (product: ProductResponse) => {
@@ -41,7 +41,7 @@ export function Products() {
       } else {
         products.push({
           product: product,
-          quantity: 1,
+          quantity: 1
         });
       }
 
@@ -55,7 +55,6 @@ export function Products() {
 
   return (
     <div className='min-h-screen flex flex-col px-6 py-10 relative'>
-      
       {products?.length ? (
         <div className='grid grid-cols-2 gap-3 sm:gap-4'>
           {products.map((product) => (
@@ -72,7 +71,7 @@ export function Products() {
           Ainda não temos produtos cadastrados.
         </p>
       )}
-      
+
       <CartButton itemCount={cartCount} onClick={() => navigate('/carrinho')} />
     </div>
   );

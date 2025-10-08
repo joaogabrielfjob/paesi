@@ -5,7 +5,7 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useLoading } from '@/hooks/use_loading';
@@ -20,27 +20,27 @@ import z from 'zod';
 
 const formSchema = z.object({
   postalCode: z.string().min(8, {
-    message: 'Por favor, insira um CEP válido',
+    message: 'Por favor, insira um CEP válido'
   }),
   country: z.string().min(1, {
-    message: 'Por favor, insira um país válido',
+    message: 'Por favor, insira um país válido'
   }),
   state: z.string().min(2, {
-    message: 'Por favor, insira um estado válido',
+    message: 'Por favor, insira um estado válido'
   }),
   city: z.string().min(1, {
-    message: 'Por favor, insira uma cidade válida',
+    message: 'Por favor, insira uma cidade válida'
   }),
   street: z.string().min(1, {
-    message: 'Por favor, insira uma rua válida',
+    message: 'Por favor, insira uma rua válida'
   }),
   neighborhood: z.string().min(1, {
-    message: 'Por favor, insira um bairro válido',
+    message: 'Por favor, insira um bairro válido'
   }),
   number: z.string().min(1, {
-    message: 'Por favor, insira um número válido',
+    message: 'Por favor, insira um número válido'
   }),
-  complement: z.string().optional(),
+  complement: z.string().optional()
 });
 
 export function Address() {
@@ -49,7 +49,7 @@ export function Address() {
 
   const { data: response, fetchStatus } = useQuery({
     queryKey: ['address'],
-    queryFn: async () => await fetchAddress(),
+    queryFn: async () => await fetchAddress()
   });
 
   useLoading([fetchStatus]);
@@ -63,7 +63,7 @@ export function Address() {
     },
     onError: (error) => {
       console.error('Erro ao salvar endereço:', error);
-    },
+    }
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -76,8 +76,8 @@ export function Address() {
       street: '',
       neighborhood: '',
       number: '',
-      complement: '',
-    },
+      complement: ''
+    }
   });
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export function Address() {
         street: response.address?.street || '',
         neighborhood: response.address?.neighborhood || '',
         number: response.address?.number || '',
-        complement: response.address?.complement || '',
+        complement: response.address?.complement || ''
       });
     }
   }, [response, form]);

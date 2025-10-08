@@ -9,13 +9,13 @@ interface CartProductCardProps {
 export function CartProductCard({
   cartProduct,
   image,
-  onQuantityChange,
+  onQuantityChange
 }: CartProductCardProps) {
   const { product, quantity } = cartProduct;
 
   const formattedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'BRL',
+    currency: 'BRL'
   }).format(product.price * quantity);
 
   const handleDecrease = () => {

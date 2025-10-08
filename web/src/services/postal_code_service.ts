@@ -10,7 +10,7 @@ const fetchPostalCode = async (cep: string) => {
     }
 
     const { data } = await brasilAPIClient.get<BrasilAPIPostalCodeResponse>(
-      `/cep/v1/${cleanCep}`,
+      `/cep/v1/${cleanCep}`
     );
 
     return data;

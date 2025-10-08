@@ -9,7 +9,7 @@ interface ProductCardProps {
 export function ProductCard({ image, product, onAdd }: ProductCardProps) {
   const formattedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'BRL',
+    currency: 'BRL'
   }).format(product.price);
 
   const handleAddClick = () => {

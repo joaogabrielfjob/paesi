@@ -22,8 +22,8 @@ export const routes = createBrowserRouter([
           title: '',
           menu: false,
           back: false,
-          location: '',
-        },
+          location: ''
+        }
       },
       {
         path: 'entrar',
@@ -32,8 +32,8 @@ export const routes = createBrowserRouter([
           title: '',
           menu: false,
           back: true,
-          location: '/inicio',
-        },
+          location: '/inicio'
+        }
       },
       {
         path: 'criar-conta',
@@ -42,10 +42,10 @@ export const routes = createBrowserRouter([
           title: '',
           menu: false,
           back: true,
-          location: '/inicio',
-        },
-      },
-    ],
+          location: '/inicio'
+        }
+      }
+    ]
   },
   {
     path: '/',
@@ -58,8 +58,8 @@ export const routes = createBrowserRouter([
           title: 'Produtos',
           menu: true,
           back: false,
-          location: '',
-        },
+          location: ''
+        }
       },
       {
         path: 'carrinho',
@@ -68,8 +68,8 @@ export const routes = createBrowserRouter([
           title: 'Carrinho',
           menu: false,
           back: true,
-          location: '/',
-        },
+          location: '/'
+        }
       },
       {
         path: 'finalizar-compra',
@@ -78,8 +78,8 @@ export const routes = createBrowserRouter([
           title: 'Finalizar compra',
           menu: false,
           back: true,
-          location: '/carrinho',
-        },
+          location: '/carrinho'
+        }
       },
       {
         path: 'pedidos',
@@ -88,8 +88,8 @@ export const routes = createBrowserRouter([
           title: 'Pedidos',
           menu: false,
           back: true,
-          location: '/',
-        },
+          location: '/'
+        }
       },
       {
         path: 'minha-conta',
@@ -98,8 +98,8 @@ export const routes = createBrowserRouter([
           title: 'Meus dados',
           menu: false,
           back: true,
-          location: '/',
-        },
+          location: '/'
+        }
       },
       {
         path: 'endereco',
@@ -108,19 +108,19 @@ export const routes = createBrowserRouter([
           title: 'Endereço',
           menu: false,
           back: true,
-          location: '/',
-        },
-      },
-    ],
+          location: '/'
+        }
+      }
+    ]
   },
   {
     path: '*',
-    element: <Products />,
+    element: <Auth />,
     handle: {
-      title: 'Produtos',
-      menu: true,
+      title: '',
+      menu: false,
       back: false,
-      location: '',
-    },
-  },
+      location: ''
+    }
+  }
 ]);

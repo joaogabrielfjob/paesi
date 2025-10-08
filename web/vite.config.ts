@@ -7,12 +7,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@': '/src',
-    },
+      '@': '/src'
+    }
   },
   server: {
-    allowedHosts: [
-      'web-production-38e41.up.railway.app'
-    ]
+    allowedHosts: ['web-production-38e41.up.railway.app']
   }
 });
