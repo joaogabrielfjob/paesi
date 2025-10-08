@@ -50,7 +50,7 @@ export function SignIn() {
       return signIn(request);
     },
     onSuccess: () => {
-      fetchTokenMutation.mutate();
+      navigate('/');
     },
     onError: (error) => {
       console.error('Sign in failed:', error);

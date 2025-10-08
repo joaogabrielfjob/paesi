@@ -33,7 +33,7 @@ const formSchema = z.object({
 export function SignUp() {
   const navigate = useNavigate();
 
-  const fetchTokenMutation = useMutation({
+  /* const fetchTokenMutation = useMutation({
     mutationFn: async () => {
       return await fetchToken();
     },
@@ -45,14 +45,14 @@ export function SignUp() {
     onError: (error) => {
       console.error('Failed to fetch token:', error);
     },
-  });
+  }); */
 
   const signUpMutation = useMutation({
     mutationFn: async (request: SignUpRequest) => {
       return await signUp(request);
     },
     onSuccess: () => {
-      fetchTokenMutation.mutate();
+      navigate('/');
     },
     onError: (error) => {
       console.error('Sign in failed:', error);

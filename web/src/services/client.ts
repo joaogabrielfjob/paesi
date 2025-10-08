@@ -5,7 +5,7 @@ import { transformDates } from '@/interceptors/date_parser_interceptor';
 
 // Main API client (Go server)
 export const client = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:7777',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:7778',
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
   transformResponse: [
@@ -14,12 +14,12 @@ export const client = axios.create({
   ],
 });
 
-client.interceptors.request.use(tokenInterceptor);
-client.interceptors.response.use((response) => response, authInterceptor);
+//client.interceptors.request.use(tokenInterceptor);
+//client.interceptors.response.use((response) => response, authInterceptor);
 
 // Auth client (Bun server)
 export const authClient = axios.create({
-  baseURL: import.meta.env.VITE_AUTH_URL || 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_AUTH_URL || 'http://localhost:7778',
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
   transformResponse: [
@@ -28,5 +28,5 @@ export const authClient = axios.create({
   ],
 });
 
-authClient.interceptors.request.use(tokenInterceptor);
-authClient.interceptors.response.use((response) => response, authInterceptor);
+//authClient.interceptors.request.use(tokenInterceptor);
+//authClient.interceptors.response.use((response) => response, authInterceptor);

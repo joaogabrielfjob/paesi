@@ -7,7 +7,7 @@ import type {
 } from './types';
 import { authClient } from './client';
 
-const basePath = '/api/auth';
+const basePath = '/auth';
 
 const signIn = async (request: SignInRequest) => {
   return await authClient.post<AuthResponse>(`${basePath}/sign-in/email`, request);

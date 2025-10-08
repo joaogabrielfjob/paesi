@@ -47,7 +47,7 @@ export function Address() {
   const queryClient = useQueryClient();
   const [isLoadingCep, setIsLoadingCep] = useState(false);
 
-  const { data: address, fetchStatus } = useQuery({
+  const { data: response, fetchStatus } = useQuery({
     queryKey: ['address'],
     queryFn: async () => await fetchAddress(),
   });
@@ -81,19 +81,19 @@ export function Address() {
   });
 
   useEffect(() => {
-    if (address) {
+    if (response) {
       form.reset({
-        postalCode: address.postalCode || '',
-        country: address.country || '',
-        state: address.state || '',
-        city: address.city || '',
-        street: address.street || '',
-        neighborhood: address.neighborhood || '',
-        number: address.number || '',
-        complement: address.complement || '',
+        postalCode: response.address?.postalCode || '',
+        country: response.address?.country || '',
+        state: response.address?.state || '',
+        city: response.address?.city || '',
+        street: response.address?.street || '',
+        neighborhood: response.address?.neighborhood || '',
+        number: response.address?.number || '',
+        complement: response.address?.complement || '',
       });
     }
-  }, [address, form]);
+  }, [response, form]);
 
   async function handleCepBlur(cep: string) {
     const cleanCep = cep.replace(/\D/g, '');

@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false) @map("email_verified")
+  image         String?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @default(now()) @updatedAt @map("updated_at")
+  phone         String?
+  sessions      Session[]
+  accounts      Account[]
+  Address       Address?
+  Order         Order[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime @map("expires_at")
+  token     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String    @map("account_id")
+  providerId            String    @map("provider_id")
+  userId                String    @map("user_id")
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?   @map("access_token")
+  refreshToken          String?   @map("refresh_token")
+  idToken               String?   @map("id_token")
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at")
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at")
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updatedAt             DateTime  @updatedAt @map("updated_at")
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("verification")
+}
+
+model Address {
+  id           Int    @id @default(autoincrement())
+  userId       String @unique @map("user_id")
+  postalCode   String @map("postal_code")
+  country      String
+  state        String
+  city         String
+  street       String
+  neighborhood String
+  number       String
+  complement   String
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("address")
+}
+
+model Product {
+  id      Int     @id @default(autoincrement())
+  name    String
+  company String
+  price   Decimal
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  OrderItem OrderItem[]
+
+  @@map("product")
+}
+
+model Order {
+  id                  Int       @id @default(autoincrement())
+  userId              String    @map("user_id")
+  code                String
+  status              String
+  total               Decimal
+  estimatedDeliveryIn DateTime? @map("estimated_delivery_in")
+  deliveredAt         DateTime? @map("delivered_at")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user      User        @relation(fields: [userId], references: [id])
+  orderItem OrderItem[] @relation("OrderToOrderItem")
+
+  @@map("order")
+}
+
+model OrderItem {
+  id        Int @id @default(autoincrement())
+  orderId   Int @map("order_id")
+  productId Int @map("product_id")
+  quantity  Int
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  order   Order   @relation("OrderToOrderItem", fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_item")
+}

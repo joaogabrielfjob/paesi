@@ -6,7 +6,7 @@ export async function authInterceptor(
 ): Promise<AxiosRequestConfig | AxiosError> {
   if (
     error.response?.status === 401 &&
-    error.config?.url != '/api/auth/token'
+    error.config?.url != '/auth/token'
   ) {
     try {
       const tokenResponse = await fetchToken();

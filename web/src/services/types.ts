@@ -65,14 +65,16 @@ export type UpdateUserRequest = {
 };
 
 export type AddressResponse = {
-  postalCode: string;
-  country: string;
-  state: string;
-  city: string;
-  street: string;
-  neighborhood: string;
-  number: string;
-  complement?: string;
+  address?: {
+    postalCode: string;
+    country: string;
+    state: string;
+    city: string;
+    street: string;
+    neighborhood: string;
+    number: string;
+    complement?: string;
+  }
 };
 
 export type UpsertAddressRequest = {
